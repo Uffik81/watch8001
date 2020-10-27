@@ -138,9 +138,6 @@ def create_srv_tcp(port):
 
 # Web services
 class HttpProcessor(BaseHTTPRequestHandler):
-    def createUsers(self,_idtax,_idunitfirm,_uiddb):
-        return """INSERT INTO `userdb` (`idtax`,`name`,`createdb`,`paydate`,`optmode`,`isretail`,`demomode`,`begindoc`,`beginlic`,`endlic`,`isdelete`,`connecting`,`uiddb`) 
-                  VALUES ('{1}','not name','{0}','2021-01-01 00:00:00','0','1','1','2020-09-25 00:00:00','2020-09-25 00:00:00','2021-01-01 00:00:00','0','0001-01-01 00:00:00','{3}');""".format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'),_idtax,_idunitfirm,_uiddb)
 
     def do_GET(self):
         try:
