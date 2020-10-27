@@ -54,7 +54,7 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
                         if net_dev[3] == 'LK':
                             batt = int(mess[3])
                             gps = int(mess[1])
-                            # b'[3G*ID*0002*LK][3G*ID*0008*REMOVE,1]'
+                            # b'[3G*ID*0002*LK][3G*ID*0008*REMOVE,1]' 
                             # b'[3G*ID*0002*LK][3G*ID*0006*PEDO,1]' 
                             # b'[3G*ID*0016*REMIND,8:0-1-3-0000000]'
                             # b'[3G*ID*0002*LK][3G*ID*0008*FLOWER,2]'
@@ -272,6 +272,7 @@ def configDB():
                     print('MySQL Error [{0}]:{1}'.format(code,message))
             # Create tables 
             myCursor.execute('USE {};'.format(nameClientDB))
+            # Таблица текущего состояния устройства
             myCursor.execute('SHOW TABLES LIKE "devices";')
             if myCursor.rowcount == 0:
                myCursor.execute("""
@@ -279,14 +280,10 @@ def configDB():
                       `deviceid` VARCHAR(64) NOT NULL COLLATE 'utf8_bin',
                       `ICCID` VARCHAR(128) NOT NULL COLLATE 'utf8_bin',
                       `gps` INT(3) NOT NULL ,
-                      `dt` DATE NOT NULL,
+                      `dt` DATETIME NOT NULL,
                       `vbattery` INT(3) NOT NULL,
-                      `lon` FLOAT NOT NULL ,
-                      `lat` FLOAT NOT NULL ,
-                      `speed` FLOAT NOT NULL,
-                      `dim` FLOAT NOT NULL ,
                       `typemsg` VARCHAR(32) NOT NULL COLLATE 'utf8_bin',
-                      `lasttd` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+                      `lastdt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
                     ) COLLATE='utf8_bin' ENGINE=InnoDB;
                """)
 
@@ -297,14 +294,14 @@ def configDB():
                       `deviceid` VARCHAR(64) NOT NULL COLLATE 'utf8_bin',
                       `devicemessage` VARCHAR(128) NOT NULL COLLATE 'utf8_bin',
                       `gps` INT(3) NOT NULL ,
-                      `dt` DATE NOT NULL,
+                      `dt` DATETIME NOT NULL,
                       `vbattery` INT(3) NOT NULL,
                       `lon` FLOAT NOT NULL ,
                       `lat` FLOAT NOT NULL ,
                       `speed` FLOAT NOT NULL,
                       `dim` FLOAT NOT NULL ,
                       `typemsg` VARCHAR(32) NOT NULL COLLATE 'utf8_bin',
-                      `lasttd` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+                      `lastdt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
                     ) COLLATE='utf8_bin' ENGINE=InnoDB;
                """)
 
