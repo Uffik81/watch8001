@@ -1,5 +1,6 @@
 ## watch8001  
 
+![watch8001.png](watch8001.png)
 
 A small server that allows you to get data from children's watches, such as:
 
